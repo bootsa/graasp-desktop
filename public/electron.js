@@ -96,6 +96,7 @@ const createWindow = () => {
     },
     height: 860,
     width: 1280,
+    icon: ICON_PATH
   });
 
   mainWindow.loadURL(
