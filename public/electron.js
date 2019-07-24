@@ -14,6 +14,7 @@ const { autoUpdater } = require('electron-updater');
 const Sentry = require('@sentry/electron');
 const ua = require('universal-analytics');
 const { machineIdSync } = require('node-machine-id');
+const openAboutWindow = require('about-window').default;
 const logger = require('./app/logger');
 const { ensureDatabaseExists, bootstrapDatabase } = require('./app/db');
 const {
@@ -152,7 +153,21 @@ const generateMenu = () => {
         // },
         {
           label: 'About',
-          role: 'about',
+          // role: 'about',
+          click: () => openAboutWindow({
+            icon_path: path.join(__dirname, '../assets/icon.png'),
+            copyright: 'Copyright (c) 2019 React EPFL',
+            package_json_dir: path.join(__dirname, '../'),
+            win_options: {
+              resizable: false,
+              minimizable: false,
+              maximizable: false,
+              movable: false,
+              parent: mainWindow,
+              modal: true,
+              menu: []
+            }
+          })
         },
         {
           label: 'Quit',
